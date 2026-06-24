@@ -655,75 +655,80 @@
 .experiences {
   margin-top: clamp(110px, 14vw, 190px);
   padding: clamp(90px, 11vw, 150px) max(24px, calc((100vw - 1320px) / 2));
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: clamp(60px, 9vw, 150px);
   color: var(--ivory);
-  background: var(--forest);
+  background: #76502f;
 }
 
 .experiences-intro {
-  position: sticky;
-  top: 60px;
-  align-self: start;
+  max-width: 760px;
+  margin: 0 auto clamp(70px, 8vw, 110px);
+  text-align: center;
 }
 
 .experiences h2 {
   color: var(--ivory);
-  font-size: clamp(4rem, 7vw, 7.2rem);
-  line-height: 0.83;
-  letter-spacing: -0.045em;
+  font-size: clamp(3.6rem, 6vw, 6.8rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
 }
 
 .experiences-intro > p:last-child {
-  max-width: 420px;
-  margin: 34px 0 0;
-  color: rgba(255, 252, 242, 0.64);
+  max-width: 590px;
+  margin: 32px auto 0;
+  color: rgba(255, 252, 242, 0.7);
   font-size: 0.9rem;
   line-height: 1.8;
 }
 
-.experience-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.experience-list li {
-  min-height: 145px;
-  padding: 34px 0;
+.experience-grid {
   display: grid;
-  grid-template-columns: 52px 1fr 0.7fr;
-  align-items: start;
-  gap: 24px;
-  border-top: 1px solid rgba(255, 252, 242, 0.18);
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: clamp(36px, 5vw, 80px);
+  row-gap: clamp(64px, 7vw, 96px);
 }
 
-.experience-list li:last-child {
-  border-bottom: 1px solid rgba(255, 252, 242, 0.18);
+.experience-card {
+  position: relative;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 250, 240, 0.2);
 }
 
-.experience-list span {
-  padding-top: 7px;
-  color: var(--ochre);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
+.experience-card svg {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 28px;
+  fill: none;
+  stroke: var(--ochre);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.experience-list h3 {
+.experience-number {
+  position: absolute;
+  top: 31px;
+  right: 0;
   margin: 0;
+  color: rgba(255, 250, 240, 0.38);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+
+.experience-card h3 {
+  margin: 0 0 18px;
   color: var(--ivory);
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 2.7vw, 2.6rem);
+  font-size: clamp(1.75rem, 2.2vw, 2.35rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.05;
 }
 
-.experience-list p {
-  margin: 4px 0 0;
-  color: rgba(255, 252, 242, 0.58);
+.experience-card > p:last-child {
+  max-width: 350px;
+  margin: 0;
+  color: rgba(255, 252, 242, 0.7);
   font-size: 0.82rem;
-  line-height: 1.65;
+  line-height: 1.75;
 }
 
 .stay {
@@ -1037,11 +1042,12 @@
   }
 
   .experiences {
-    grid-template-columns: 1fr;
+    padding-right: 32px;
+    padding-left: 32px;
   }
 
-  .experiences-intro {
-    position: static;
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .stay {
@@ -1196,20 +1202,21 @@
   .experiences {
     margin-top: 100px;
     padding: 90px 20px;
-    gap: 55px;
   }
 
-  .experiences h2 { font-size: 4.5rem; }
-
-  .experience-list li {
-    padding: 28px 0;
-    grid-template-columns: 35px 1fr;
-    gap: 15px;
+  .experiences-intro {
+    margin-bottom: 64px;
   }
 
-  .experience-list p {
-    grid-column: 2;
-    margin-top: -10px;
+  .experiences h2 { font-size: clamp(3.6rem, 17vw, 4.8rem); }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .experience-card > p:last-child {
+    max-width: 100%;
   }
 
   .stay {
