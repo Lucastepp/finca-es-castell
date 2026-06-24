@@ -1,0 +1,194 @@
+<header class="site-header" [class.menu-is-open]="menuOpen()">
+  <a class="wordmark" href="#top" aria-label="Finca Es Castell home" (click)="closeMenu()">
+    <span>Es Castell</span>
+    <small>Agroturismo</small>
+  </a>
+
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-label="Toggle navigation"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="site-navigation"
+    (click)="toggleMenu()"
+  >
+    <span></span><span></span>
+  </button>
+
+  <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
+    <a href="#estate" (click)="closeMenu()">The estate</a>
+    <a href="#stay" (click)="closeMenu()">Stay</a>
+    <a href="#experiences" (click)="closeMenu()">Experiences</a>
+    <a class="nav-book" href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">Book your stay</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <video
+      #heroVideo
+      class="hero-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      poster="/media/hero-poster.webp"
+      aria-hidden="true"
+    >
+      <source src="/media/hero-es-castell-mobile.mp4" type="video/mp4" media="(max-width: 700px)" />
+      <source src="/media/hero-es-castell.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-shade"></div>
+
+    <div class="hero-copy">
+      <p class="eyebrow light">Agroturismo · Mallorca</p>
+      <h1 id="hero-title">Where Mallorca<br /><em>slows down.</em></h1>
+      <p class="hero-intro">A stone-built retreat at the foot of the Serra de Tramuntana.</p>
+      <a class="text-link light-link" href="#estate">Enter the estate <span aria-hidden="true">↓</span></a>
+    </div>
+
+    <div class="hero-rail" aria-label="Location">
+      <span>39°48′ N</span>
+      <span>Serra de Tramuntana</span>
+    </div>
+
+    <button
+      class="video-control"
+      type="button"
+      [attr.aria-label]="videoPaused() ? 'Play background film' : 'Pause background film'"
+      [attr.aria-pressed]="videoPaused()"
+      (click)="toggleVideo()"
+    >
+      <span class="control-icon" aria-hidden="true">{{ videoPaused() ? '▶' : 'Ⅱ' }}</span>
+      {{ videoPaused() ? 'Play film' : 'Pause film' }}
+    </button>
+  </section>
+
+  <section class="manifesto" id="estate" aria-labelledby="manifesto-title">
+    <div class="section-index" aria-hidden="true">01</div>
+    <div class="manifesto-copy">
+      <p class="eyebrow">The estate</p>
+      <h2 id="manifesto-title">A quieter kind of luxury.</h2>
+      <p class="manifesto-lead">Not marble lobbies or velvet ropes. Stone warmed by the afternoon sun. Olive trees moving in the breeze. A long table, an open door, and nowhere else you need to be.</p>
+    </div>
+    <p class="manifesto-note">Finca Es Castell brings the character of rural Mallorca into every part of the stay — unhurried, grounded and close to the landscape.</p>
+  </section>
+
+  <section class="story-grid" aria-label="The character of Finca Es Castell">
+    <figure class="story-main">
+      <img src="/media/estate-stone.webp" alt="Stone buildings and olive trees at Finca Es Castell" loading="lazy" />
+      <figcaption>Stone, timber and mountain air</figcaption>
+    </figure>
+    <article class="story-card">
+      <p class="eyebrow">Made by time</p>
+      <h2>Old walls.<br />Open skies.</h2>
+      <p>The estate carries its history in the details: worn steps, timber doors, green shutters and courtyards where the boundary between indoors and outdoors almost disappears.</p>
+      <a class="text-link" href="#gallery">See the grounds <span aria-hidden="true">↘</span></a>
+    </article>
+    <figure class="story-tall">
+      <img src="/media/vertical-estate.webp" alt="Green shutters and a shaded stone doorway at the finca" loading="lazy" />
+    </figure>
+  </section>
+
+  <section class="gallery-section photo-journey" id="gallery" aria-labelledby="gallery-title" [class.is-paused]="photoMotionPaused()">
+    <div class="gallery-heading">
+      <div>
+        <p class="eyebrow">A day in frames</p>
+        <h2 id="gallery-title">The finca,<br /><em>as it feels.</em></h2>
+      </div>
+      <div class="gallery-aside">
+        <p>Follow the light from stone courtyards to quiet rooms and open windows — a slow portrait made entirely at Es Castell.</p>
+        <button type="button" class="motion-toggle" [attr.aria-pressed]="photoMotionPaused()" (click)="togglePhotoMotion()">
+          <span aria-hidden="true">{{ photoMotionPaused() ? '▶' : 'Ⅱ' }}</span>
+          {{ photoMotionPaused() ? 'Play photographs' : 'Pause photographs' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="photo-rails" aria-label="Photographs of Finca Es Castell">
+      <div class="photo-rail rail-forward">
+        <div class="photo-set">
+          @for (photo of exteriorPhotos; track photo.src) {
+            <figure [class.portrait]="photo.portrait"><img [src]="photo.src" [alt]="photo.alt" loading="lazy" /></figure>
+          }
+        </div>
+        <div class="photo-set duplicate" aria-hidden="true">
+          @for (photo of exteriorPhotos; track photo.src) {
+            <figure [class.portrait]="photo.portrait"><img [src]="photo.src" alt="" loading="lazy" /></figure>
+          }
+        </div>
+      </div>
+
+      <div class="photo-rail rail-reverse">
+        <div class="photo-set">
+          @for (photo of interiorPhotos; track photo.src) {
+            <figure [class.portrait]="photo.portrait"><img [src]="photo.src" [alt]="photo.alt" loading="lazy" /></figure>
+          }
+        </div>
+        <div class="photo-set duplicate" aria-hidden="true">
+          @for (photo of interiorPhotos; track photo.src) {
+            <figure [class.portrait]="photo.portrait"><img [src]="photo.src" alt="" loading="lazy" /></figure>
+          }
+        </div>
+      </div>
+    </div>
+    <p class="swipe-note">Swipe to wander through the finca <span aria-hidden="true">→</span></p>
+  </section>
+
+  <section class="experiences" id="experiences" aria-labelledby="experiences-title">
+    <div class="experiences-intro">
+      <p class="eyebrow light">Life at Es Castell</p>
+      <h2 id="experiences-title">Come back to<br /><em>your senses.</em></h2>
+      <p>Days here are measured in light, appetite and the length of an evening — not notifications.</p>
+    </div>
+
+    <ol class="experience-list">
+      <li><span>01</span><h3>Walk the Tramuntana</h3><p>Paths, valleys and mountain air from the estate.</p></li>
+      <li><span>02</span><h3>Meet the olive groves</h3><p>Ancient trees shaped slowly by wind and weather.</p></li>
+      <li><span>03</span><h3>Move more slowly</h3><p>Yoga, massage and space to simply be still.</p></li>
+      <li><span>04</span><h3>Look up after dark</h3><p>Quiet nights under Mallorca's open sky.</p></li>
+    </ol>
+  </section>
+
+  <section class="stay" id="stay" aria-labelledby="stay-title">
+    <figure class="stay-image">
+      <img src="/media/vertical-stone.webp" alt="The stone entrance and traditional sign at Es Castell" loading="lazy" />
+    </figure>
+    <div class="stay-copy">
+      <p class="eyebrow">Your stay</p>
+      <h2 id="stay-title">Rooms that still feel like part of the finca.</h2>
+      <p>Original stone and timber give every room its own character, while considered comforts make it easy to settle in. Wake to the garden, the valley or the changing light across the mountains.</p>
+      <ul>
+        <li>Traditional Mallorcan character</li>
+        <li>Garden, terrace and valley settings</li>
+        <li>A direct route to secure booking</li>
+      </ul>
+      <a class="button dark-button" href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">View rooms & availability</a>
+    </div>
+  </section>
+
+  <section class="booking-cta" aria-labelledby="booking-title">
+    <img src="/media/mountain-house.webp" alt="Finca Es Castell beneath the Tramuntana mountains" loading="lazy" />
+    <div class="booking-shade"></div>
+    <div class="booking-copy">
+      <p class="eyebrow light">Your Mallorca escape</p>
+      <h2 id="booking-title">Let the world<br />wait a while.</h2>
+      <a class="button light-button" href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">Book your stay</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="wordmark footer-wordmark" href="#top" aria-label="Back to top">
+    <span>Es Castell</span>
+    <small>Agroturismo</small>
+  </a>
+  <p>At the foot of the Serra de Tramuntana, Mallorca.</p>
+  <div class="footer-links">
+    <a href="mailto:mallorca@fincaescastell.com">Email</a>
+    <a href="tel:+34670251225">Call</a>
+    <a href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">Booking</a>
+  </div>
+  <small class="concept-note">Concept website · Business details to be confirmed before launch</small>
+</footer>
