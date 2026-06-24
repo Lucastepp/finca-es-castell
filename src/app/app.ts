@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, QueryList, ViewChild, ViewChildren, signal } from '@angular/core';
 
 interface JourneyPhoto {
   src: string;
@@ -39,18 +39,24 @@ const interiorPhotos: JourneyPhoto[] = [
 })
 export class App implements AfterViewInit, OnDestroy {
   @ViewChild('heroVideo') private heroVideo?: ElementRef<HTMLVideoElement>;
+  @ViewChildren('reelVideo') private reelVideos?: QueryList<ElementRef<HTMLVideoElement>>;
   private heroObserver?: IntersectionObserver;
+  private reelObserver?: IntersectionObserver;
   private heroPausedByUser = false;
+  private fourKTimer?: ReturnType<typeof setTimeout>;
 
   protected readonly menuOpen = signal(false);
   protected readonly videoPaused = signal(false);
   protected readonly photoMotionPaused = signal(false);
+  protected readonly fourKMessage = signal('');
   protected readonly exteriorPhotos = exteriorPhotos;
   protected readonly interiorPhotos = interiorPhotos;
 
   ngAfterViewInit(): void {
     const video = this.heroVideo?.nativeElement;
     if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
 
     if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       video.pause();
@@ -62,17 +68,38 @@ export class App implements AfterViewInit, OnDestroy {
     if (typeof IntersectionObserver !== 'undefined') {
       this.heroObserver = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting && !this.heroPausedByUser) {
-          void video.play();
+          void video.play().catch(() => undefined);
         } else if (!entry.isIntersecting) {
           video.pause();
         }
       }, { threshold: 0.1 });
       this.heroObserver.observe(video);
+
+      this.reelObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const reel = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            void reel.play().catch(() => undefined);
+          } else {
+            reel.pause();
+          }
+        }
+      }, { threshold: 0.28 });
+
+      for (const reel of this.reelVideos ?? []) {
+        const reelVideo = reel.nativeElement;
+        reelVideo.muted = true;
+        reelVideo.defaultMuted = true;
+        reelVideo.loop = true;
+        this.reelObserver.observe(reelVideo);
+      }
     }
   }
 
   ngOnDestroy(): void {
     this.heroObserver?.disconnect();
+    this.reelObserver?.disconnect();
+    if (this.fourKTimer) clearTimeout(this.fourKTimer);
   }
 
   protected toggleMenu(): void {
@@ -89,7 +116,7 @@ export class App implements AfterViewInit, OnDestroy {
 
     if (video.paused) {
       this.heroPausedByUser = false;
-      void video.play();
+      void video.play().catch(() => undefined);
       this.videoPaused.set(false);
     } else {
       this.heroPausedByUser = true;
@@ -100,6 +127,12 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected togglePhotoMotion(): void {
     this.photoMotionPaused.update((paused) => !paused);
+  }
+
+  protected showFourKPlaceholder(film: string): void {
+    this.fourKMessage.set(`${film} — the 4K YouTube link will be connected for launch.`);
+    if (this.fourKTimer) clearTimeout(this.fourKTimer);
+    this.fourKTimer = setTimeout(() => this.fourKMessage.set(''), 4200);
   }
 
   @HostListener('document:keydown.escape')

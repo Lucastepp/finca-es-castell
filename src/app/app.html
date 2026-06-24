@@ -17,6 +17,7 @@
 
   <nav id="site-navigation" class="site-nav" aria-label="Primary navigation">
     <a href="#estate" (click)="closeMenu()">The estate</a>
+    <a href="#films" (click)="closeMenu()">Films</a>
     <a href="#stay" (click)="closeMenu()">Stay</a>
     <a href="#experiences" (click)="closeMenu()">Experiences</a>
     <a class="nav-book" href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">Book your stay</a>
@@ -28,7 +29,6 @@
     <video
       #heroVideo
       class="hero-video"
-      autoplay
       loop
       muted
       playsinline
@@ -134,6 +134,52 @@
       </div>
     </div>
     <p class="swipe-note">Swipe to wander through the finca <span aria-hidden="true">→</span></p>
+  </section>
+
+  <section class="films-showcase" id="films" aria-labelledby="films-title">
+    <div class="films-heading">
+      <div>
+        <p class="eyebrow">Es Castell in motion</p>
+        <h2 id="films-title">Stay a little<br /><em>longer.</em></h2>
+      </div>
+      <p>Three original films made at the finca — stone, light and the small movements that make a place stay with you.</p>
+    </div>
+
+    <div class="film-grid">
+      <figure class="film-card horizontal-film">
+        <video #reelVideo loop muted playsinline preload="metadata" poster="/media/film-horizontal-poster.webp" aria-label="A cinematic journey through Finca Es Castell">
+          <source src="/media/film-horizontal.mp4" type="video/mp4" />
+        </video>
+        <figcaption>
+          <span><small>Film 01 · 02:01</small>Through the old walls</span>
+          <button type="button" (click)="showFourKPlaceholder('Through the old walls')">View in 4K <span aria-hidden="true">↗</span></button>
+        </figcaption>
+      </figure>
+
+      <figure class="film-card vertical-film">
+        <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-stone.webp" aria-label="Vertical film of the finca's stone paths and architecture">
+          <source src="/media/film-vertical-one.mp4" type="video/mp4" />
+        </video>
+        <figcaption>
+          <span><small>Film 02 · 00:56</small>A slower arrival</span>
+          <button type="button" (click)="showFourKPlaceholder('A slower arrival')">4K <span aria-hidden="true">↗</span></button>
+        </figcaption>
+      </figure>
+
+      <figure class="film-card vertical-film">
+        <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-estate.webp" aria-label="Vertical film of the gardens and green shutters at Es Castell">
+          <source src="/media/film-vertical-two.mp4" type="video/mp4" />
+        </video>
+        <figcaption>
+          <span><small>Film 03 · 00:55</small>Light on stone</span>
+          <button type="button" (click)="showFourKPlaceholder('Light on stone')">4K <span aria-hidden="true">↗</span></button>
+        </figcaption>
+      </figure>
+    </div>
+
+    @if (fourKMessage()) {
+      <p class="four-k-message" role="status">{{ fourKMessage() }}</p>
+    }
   </section>
 
   <section class="experiences" id="experiences" aria-labelledby="experiences-title">
