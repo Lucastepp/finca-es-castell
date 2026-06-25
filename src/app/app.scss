@@ -525,11 +525,9 @@
   line-height: 1.8;
 }
 
-.film-grid {
+.film-story {
   display: grid;
-  grid-template-columns: minmax(0, 1.9fr) minmax(180px, 0.52fr) minmax(180px, 0.52fr);
-  align-items: end;
-  gap: 14px;
+  gap: clamp(36px, 5vw, 72px);
 }
 
 .film-card {
@@ -541,16 +539,56 @@
 }
 
 .horizontal-film {
+  width: min(100%, 1180px);
+  margin: 0 auto;
   aspect-ratio: 16 / 9;
-  border-radius: 2px 2px 60px 2px;
+  min-height: clamp(520px, 58vw, 760px);
+  border-radius: 2px 2px 82px 2px;
+}
+
+.film-chapter {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(34px, 6vw, 96px);
 }
 
 .vertical-film {
+  justify-self: start;
+  width: min(100%, 540px);
   aspect-ratio: 9 / 16;
+  min-height: clamp(640px, 62vw, 880px);
+  border-radius: 2px 62px 2px 2px;
 }
 
-.vertical-film:last-child {
-  border-radius: 2px 2px 2px 48px;
+.film-chapter-reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+}
+
+.film-chapter-reverse .vertical-film {
+  justify-self: end;
+  border-radius: 2px 2px 2px 62px;
+}
+
+.film-copy {
+  max-width: 560px;
+}
+
+.film-copy h3 {
+  max-width: 11ch;
+  margin: 18px 0 24px;
+  color: var(--forest);
+  font-size: clamp(3.2rem, 5.6vw, 6.4rem);
+  line-height: 0.86;
+  letter-spacing: -0.052em;
+}
+
+.film-copy p:not(.eyebrow) {
+  max-width: 450px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.18rem);
+  line-height: 1.85;
 }
 
 .film-card video {
@@ -622,17 +660,17 @@
 }
 
 .vertical-film figcaption {
-  right: 13px;
-  bottom: 13px;
-  left: 13px;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
   display: grid;
-  font-size: 1.05rem;
+  font-size: clamp(1.2rem, 1.7vw, 1.65rem);
 }
 
 .vertical-film figcaption button {
   width: max-content;
-  min-height: 36px;
-  padding: 0 12px;
+  min-height: 40px;
+  padding: 0 14px;
 }
 
 .four-k-message {
@@ -1050,6 +1088,21 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .film-chapter,
+  .film-chapter-reverse {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .film-chapter-reverse .film-copy {
+    order: 2;
+  }
+
+  .film-chapter-reverse .vertical-film {
+    order: 1;
+    justify-self: start;
+  }
+
   .stay {
     gap: 55px;
   }
@@ -1170,17 +1223,24 @@
 
   .films-heading > p { margin-top: 26px; }
 
-  .film-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-  }
-
   .horizontal-film {
-    grid-column: 1 / -1;
+    min-height: clamp(300px, 82vw, 380px);
     border-radius: 2px 2px 36px 2px;
   }
 
-  .vertical-film:last-child { border-radius: 2px 2px 2px 32px; }
+  .vertical-film {
+    width: min(100%, 430px);
+    min-height: min(720px, 156vw);
+    border-radius: 2px 42px 2px 2px;
+  }
+
+  .film-chapter-reverse .vertical-film { border-radius: 2px 2px 2px 42px; }
+
+  .film-copy h3 {
+    max-width: 10ch;
+    margin-top: 14px;
+    font-size: clamp(3.2rem, 15vw, 5.2rem);
+  }
 
   .horizontal-film figcaption {
     right: 14px;
@@ -1192,6 +1252,12 @@
   .horizontal-film figcaption button {
     min-height: 36px;
     padding: 0 12px;
+  }
+
+  .vertical-film figcaption {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
   }
 
   .four-k-message {

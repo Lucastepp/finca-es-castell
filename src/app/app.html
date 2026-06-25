@@ -145,7 +145,7 @@
       <p>Three original films made at the finca — stone, light and the small movements that make a place stay with you.</p>
     </div>
 
-    <div class="film-grid">
+    <div class="film-story">
       <figure class="film-card horizontal-film">
         <video #reelVideo loop muted playsinline preload="metadata" poster="/media/film-horizontal-poster.webp" aria-label="A cinematic journey through Finca Es Castell">
           <source src="/media/film-horizontal.mp4" type="video/mp4" />
@@ -156,25 +156,41 @@
         </figcaption>
       </figure>
 
-      <figure class="film-card vertical-film">
-        <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-stone.webp" aria-label="Vertical film of the finca's stone paths and architecture">
-          <source src="/media/film-vertical-one.mp4" type="video/mp4" />
-        </video>
-        <figcaption>
-          <span><small>Film 02 · 00:56</small>A slower arrival</span>
-          <button type="button" (click)="showFourKPlaceholder('A slower arrival')">4K <span aria-hidden="true">↗</span></button>
-        </figcaption>
-      </figure>
+      <div class="film-chapter">
+        <figure class="film-card vertical-film">
+          <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-stone.webp" aria-label="Vertical film of the finca's stone paths and architecture">
+            <source src="/media/film-vertical-one.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            <span><small>Film 02 · 00:56</small>A slower arrival</span>
+            <button type="button" (click)="showFourKPlaceholder('A slower arrival')">View in 4K <span aria-hidden="true">↗</span></button>
+          </figcaption>
+        </figure>
 
-      <figure class="film-card vertical-film">
-        <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-estate.webp" aria-label="Vertical film of the gardens and green shutters at Es Castell">
-          <source src="/media/film-vertical-two.mp4" type="video/mp4" />
-        </video>
-        <figcaption>
-          <span><small>Film 03 · 00:55</small>Light on stone</span>
-          <button type="button" (click)="showFourKPlaceholder('Light on stone')">4K <span aria-hidden="true">↗</span></button>
-        </figcaption>
-      </figure>
+        <article class="film-copy">
+          <p class="eyebrow">The arrival</p>
+          <h3>First you feel the quiet.</h3>
+          <p>Finca Es Castell sits at the foot of the Serra de Tramuntana, where old stone paths, garden shadows and mountain air slow the whole day down.</p>
+        </article>
+      </div>
+
+      <div class="film-chapter film-chapter-reverse">
+        <article class="film-copy">
+          <p class="eyebrow">The atmosphere</p>
+          <h3>Luxury without losing the finca.</h3>
+          <p>The story is in the texture: green shutters, terracotta floors, olive trees and simple moments that feel deeply Mallorcan.</p>
+        </article>
+
+        <figure class="film-card vertical-film">
+          <video #reelVideo loop muted playsinline preload="metadata" poster="/media/vertical-estate.webp" aria-label="Vertical film of the gardens and green shutters at Es Castell">
+            <source src="/media/film-vertical-two.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            <span><small>Film 03 · 00:55</small>Light on stone</span>
+            <button type="button" (click)="showFourKPlaceholder('Light on stone')">View in 4K <span aria-hidden="true">↗</span></button>
+          </figcaption>
+        </figure>
+      </div>
     </div>
 
     @if (fourKMessage()) {
