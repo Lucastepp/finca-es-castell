@@ -92,6 +92,15 @@
   position: relative;
 }
 
+.language-switcher::after {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 188px;
+  height: 14px;
+  content: '';
+}
+
 .language-current,
 .language-menu button {
   border: 0;
@@ -152,13 +161,14 @@
 
 .flag-en {
   background:
-    linear-gradient(35deg, transparent 37%, #fff 37% 44%, #c8102e 44% 50%, #fff 50% 57%, transparent 57%),
-    linear-gradient(145deg, transparent 37%, #fff 37% 44%, #c8102e 44% 50%, #fff 50% 57%, transparent 57%),
-    linear-gradient(90deg, transparent 42%, #fff 42% 58%, transparent 58%),
-    linear-gradient(0deg, transparent 38%, #fff 38% 62%, transparent 62%),
-    linear-gradient(90deg, transparent 46%, #c8102e 46% 54%, transparent 54%),
-    linear-gradient(0deg, transparent 44%, #c8102e 44% 56%, transparent 56%),
+    linear-gradient(34deg, transparent 0 35%, #fff 35% 43%, #c8102e 43% 48%, #fff 48% 56%, transparent 56%),
+    linear-gradient(146deg, transparent 0 35%, #fff 35% 43%, #c8102e 43% 48%, #fff 48% 56%, transparent 56%),
+    linear-gradient(90deg, transparent 0 39%, #fff 39% 61%, transparent 61%),
+    linear-gradient(0deg, transparent 0 36%, #fff 36% 64%, transparent 64%),
+    linear-gradient(90deg, transparent 0 45%, #c8102e 45% 55%, transparent 55%),
+    linear-gradient(0deg, transparent 0 43%, #c8102e 43% 57%, transparent 57%),
     #012169;
+  background-size: 100% 100%;
 }
 
 .flag-es {
@@ -171,7 +181,7 @@
 
 .language-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 8px);
   right: 0;
   z-index: 30;
   width: 188px;
