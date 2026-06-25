@@ -340,6 +340,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected readonly photoMotionPaused = signal(false);
   protected readonly fourKMessage = signal('');
   protected readonly language = signal<Language>('en');
+  protected readonly languageMenuOpen = signal(false);
   protected readonly languages = languages;
   protected readonly exteriorPhotos = exteriorPhotos;
   protected readonly interiorPhotos = interiorPhotos;
@@ -411,6 +412,11 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+    this.languageMenuOpen.set(false);
+  }
+
+  protected toggleLanguageMenu(): void {
+    this.languageMenuOpen.update((open) => !open);
   }
 
   protected setLanguage(language: Language): void {
@@ -419,7 +425,12 @@ export class App implements AfterViewInit, OnDestroy {
       window.localStorage.setItem('finca-es-castell-language', language);
     }
     this.syncDocumentLanguage();
-    this.closeMenu();
+    this.languageMenuOpen.set(false);
+    this.menuOpen.set(false);
+  }
+
+  protected activeLanguage(): { code: Language; label: string; name: string } {
+    return languages.find((item) => item.code === this.language()) ?? languages[0];
   }
 
   protected t(key: keyof typeof copy.en): string {

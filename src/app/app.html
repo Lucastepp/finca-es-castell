@@ -26,18 +26,33 @@
     <a href="#stay" (click)="closeMenu()">{{ t('navStay') }}</a>
     <a href="#experiences" (click)="closeMenu()">{{ t('navExperiences') }}</a>
 
-    <div class="language-switcher" [attr.aria-label]="t('languageLabel')">
-      @for (item of languages; track item.code) {
-        <button
-          type="button"
-          [class.is-active]="language() === item.code"
-          [attr.aria-pressed]="language() === item.code"
-          [attr.aria-label]="item.name"
-          (click)="setLanguage(item.code)"
-        >
-          {{ item.label }}
-        </button>
-      }
+    <div class="language-switcher" [class.is-open]="languageMenuOpen()" [attr.aria-label]="t('languageLabel')">
+      <button
+        class="language-current"
+        type="button"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="languageMenuOpen()"
+        (click)="toggleLanguageMenu()"
+      >
+        <span class="language-flag" [class.flag-en]="language() === 'en'" [class.flag-es]="language() === 'es'" [class.flag-de]="language() === 'de'" aria-hidden="true"></span>
+        <span>{{ activeLanguage().label }}</span>
+        <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"/></svg>
+      </button>
+
+      <div class="language-menu" role="menu">
+        @for (item of languages; track item.code) {
+          <button
+            type="button"
+            role="menuitem"
+            [class.is-active]="language() === item.code"
+            (click)="setLanguage(item.code)"
+          >
+            <span class="language-flag" [class.flag-en]="item.code === 'en'" [class.flag-es]="item.code === 'es'" [class.flag-de]="item.code === 'de'" aria-hidden="true"></span>
+            <span>{{ item.name }}</span>
+            <small>{{ item.label }}</small>
+          </button>
+        }
+      </div>
     </div>
 
     <a class="nav-book" href="https://booking.avirato.com/?code=97884526&spaceTypeId=1" target="_blank" rel="noopener">{{ t('navBook') }}</a>
