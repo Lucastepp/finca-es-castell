@@ -39,7 +39,7 @@
 .site-nav {
   display: flex;
   align-items: center;
-  gap: clamp(24px, 3vw, 48px);
+  gap: clamp(18px, 2.5vw, 42px);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -84,6 +84,40 @@
 
 .nav-book:hover,
 .nav-book:focus-visible {
+  color: var(--forest);
+  background: var(--ivory);
+}
+
+.language-switcher {
+  min-height: 34px;
+  padding: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 999px;
+  background: rgba(21, 29, 20, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.language-switcher button {
+  min-width: 34px;
+  min-height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(255, 252, 242, 0.76);
+  background: transparent;
+  font: inherit;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus-visible,
+.language-switcher button.is-active {
   color: var(--forest);
   background: var(--ivory);
 }
@@ -1022,15 +1056,12 @@
     position: fixed;
     inset: 0;
     padding: 130px 28px 40px;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     gap: 22px;
-    visibility: hidden;
     background: var(--forest);
-    opacity: 0;
-    transform: translateY(-12px);
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    pointer-events: none;
   }
 
   .site-nav a {
@@ -1039,6 +1070,17 @@
     font-weight: 500;
     letter-spacing: -0.02em;
     text-transform: none;
+  }
+
+  .site-nav .language-switcher {
+    margin-top: 8px;
+  }
+
+  .site-nav .language-switcher button {
+    min-width: 44px;
+    min-height: 38px;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
   }
 
   .site-nav .nav-book {
@@ -1051,10 +1093,9 @@
     text-transform: uppercase;
   }
 
-  .menu-is-open .site-nav {
-    visibility: visible;
-    opacity: 1;
-    transform: none;
+  .site-nav.is-open {
+    display: flex;
+    pointer-events: auto;
   }
 
   .manifesto {
